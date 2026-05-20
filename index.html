@@ -243,6 +243,21 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
 #s13 .ci{font-family:var(--fm);font-size:clamp(8px,.9vw,11px);color:var(--g4);letter-spacing:1px}
 #s13 .q-mark{position:absolute;right:8vw;top:50%;transform:translateY(-50%);font-family:var(--fh);font-weight:900;font-size:clamp(120px,20vw,240px);color:var(--g1);line-height:1;pointer-events:none}
 #s13 .icon-mark{position:absolute;right:7vw;bottom:5vh;font-family:var(--fh);font-weight:200;font-size:clamp(12px,1.5vw,18px);color:var(--g2);letter-spacing:10px;text-transform:uppercase}
+/* ═══ LIGHTBOX ═══ */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;cursor:zoom-out}
+#lb.open{opacity:1;pointer-events:all}
+#lb img{max-width:90vw;max-height:88vh;object-fit:contain;transform:scale(.94);transition:transform .3s ease;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+#lb.open img{transform:scale(1)}
+#lb-close{position:absolute;top:3vh;right:3vw;font-family:var(--fm);font-size:11px;color:var(--g4);letter-spacing:3px;text-transform:uppercase;cursor:pointer;padding:8px 12px;transition:color .2s}
+#lb-close:hover{color:var(--white)}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:11px;color:var(--g4);letter-spacing:2px;cursor:pointer;padding:12px 16px;transition:color .2s;user-select:none}
+#lb-prev:hover,#lb-next:hover{color:var(--white)}
+#lb-prev{left:2vw}
+#lb-next{right:2vw}
+#lb-caption{position:absolute;bottom:3vh;left:50%;transform:translateX(-50%);font-family:var(--fm);font-size:9px;color:var(--g4);letter-spacing:3px;text-transform:uppercase;white-space:nowrap}
+.lb-trigger{cursor:zoom-in!important}
+.lb-trigger img{transition:filter .3s,opacity .3s}
+.lb-trigger:hover img{opacity:.85}
 </style>
 </head>
 <body>
@@ -324,11 +339,11 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
 <div class="slide" id="s3">
   <div class="left al d2">
     <div class="left-top">
-      <img src="images/CHURCH.jpg" alt="Church">
+      <img src="images/CHURCH.jpeg" alt="Church">
     </div>
     <div class="left-bottom">
-      <div class="lb-img"><img src="images/CASA-01.jpg" alt="Construction site as a kid"></div>
-      <div class="lb-img"><img src="images/CASA-02.jpg" alt="Construction site as a kid"></div>
+      <div class="lb-img"><img src="images/CASA-01.jpeg" alt="Construction site as a kid"></div>
+      <div class="lb-img"><img src="images/CASA-02.jpeg" alt="Construction site as a kid"></div>
     </div>
   </div>
   <div class="right">
@@ -338,7 +353,7 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
       <div class="fact">
         <div class="f-icon">🏂</div>
         <div class="f-head">Snowboarding</div>
-        <div class="f-body">One of my favorite ways to reset. Always looking for the next mountain.</div>
+        <div class="f-body">One of my favorite hobbies.</div>
       </div>
       <div class="fact">
         <div class="f-icon">🐶</div>
@@ -357,12 +372,12 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
       </div>
     </div>
     <div class="photo-strip au d5">
-      <div class="ps-img"><img src="images/LUKA.jpg" alt="Luka"></div>
-      <div class="ps-img"><img src="images/SNOWBOARD.jpg" alt="Snowboarding"></div>
-      <div class="ps-img"><img src="images/BOYS.jpg" alt="Nephews"></div>
-      <div class="ps-img"><img src="images/YAYA.jpg" alt="Niece"></div>
-      <div class="ps-img"><img src="images/GIRLS.jpg" alt="Family"></div>
-      <div class="ps-img"><img src="images/MEN.jpg" alt="Family"></div>
+      <div class="ps-img"><img src="images/LUKA.jpeg" alt="Luka"></div>
+      <div class="ps-img"><img src="images/SNOWBOARD.jpeg" alt="Snowboarding"></div>
+      <div class="ps-img"><img src="images/BOYS.jpeg" alt="Nephews"></div>
+      <div class="ps-img"><img src="images/YAYA.jpeg" alt="Niece"></div>
+      <div class="ps-img"><img src="images/GIRLS.jpeg" alt="Family"></div>
+      <div class="ps-img"><img src="images/MEN.jpeg" alt="Family"></div>
     </div>
   </div>
 </div>
@@ -468,11 +483,11 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
     <!-- Floor plans strip -->
     <div class="floor-strip" style="height:22%;flex-shrink:0">
       <div class="fi">
-        <img src="images/LEHS-01.jpg" alt="Floor Plan 1">
+        <img src="images/LEHS-01.jpeg" alt="Floor Plan 1">
         <div class="fi-lbl">Level 01 Plan</div>
       </div>
       <div class="fi">
-        <img src="images/LEHS-02.jpg" alt="Floor Plan 2">
+        <img src="images/LEHS-02.jpeg" alt="Floor Plan 2">
         <div class="fi-lbl">Level 02 Plan</div>
       </div>
     </div>
@@ -485,10 +500,10 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
 <div class="slide" id="s6">
   <div class="img-panel al d3">
     <div class="img-top">
-      <img src="images/NDMC-R1.jpg" alt="NDMC Render">
+      <img src="images/NDMC-R1.jpeg" alt="NDMC Render">
     </div>
     <div class="img-bot">
-      <img src="images/NDMC-01.jpg" alt="NDMC Drawing Sheet">
+      <img src="images/NDMC-01.jpeg" alt="NDMC Drawing Sheet">
     </div>
   </div>
   <div class="pright">
@@ -535,10 +550,10 @@ html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var
   </div>
   <div class="pright ar d4">
     <div class="pi" style="flex:1">
-      <img src="images/DAPENA-R1.jpg" alt="Dapena Render">
+      <img src="images/DAPENA-R1.jpeg" alt="Dapena Render">
     </div>
     <div class="pi" style="height:40%;flex-shrink:0;border-top:2px solid var(--g2)">
-      <img src="images/DAPENA.jpg" alt="Dapena Floor Plan">
+      <img src="images/DAPENA.jpeg" alt="Dapena Floor Plan">
     </div>
   </div>
 </div>
@@ -791,6 +806,154 @@ makeSlider('ba1','ba1-before','ba1-handle');
 makeSlider('ba2','ba2-before','ba2-handle');
 
 goTo(0);
+</script>
+<!-- LIGHTBOX -->
+<div id="lb">
+  <div id="lb-close">ESC / CLOSE</div>
+  <div id="lb-prev">&#8592; PREV</div>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-next">NEXT &#8594;</div>
+  <div id="lb-caption" id="lb-cap"></div>
+</div>
+
+<script>
+// ── LIGHTBOX ──────────────────────────────────────────────
+const lb      = document.getElementById('lb');
+const lbImg   = document.getElementById('lb-img');
+const lbCap   = document.getElementById('lb-caption');
+const lbClose = document.getElementById('lb-close');
+const lbPrev  = document.getElementById('lb-prev');
+const lbNext  = document.getElementById('lb-next');
+
+let lbGroup = [];   // array of {src, caption} for current group
+let lbIdx   = 0;
+
+function lbOpen(group, idx) {
+  lbGroup = group;
+  lbIdx   = idx;
+  lbShow();
+  lb.classList.add('open');
+}
+function lbShow() {
+  const item = lbGroup[lbIdx];
+  lbImg.src  = item.src;
+  lbCap.textContent = item.caption || '';
+  lbPrev.style.visibility = lbGroup.length > 1 ? 'visible' : 'hidden';
+  lbNext.style.visibility = lbGroup.length > 1 ? 'visible' : 'hidden';
+}
+function lbShift(dir) {
+  lbIdx = (lbIdx + dir + lbGroup.length) % lbGroup.length;
+  lbShow();
+}
+function lbClose_fn() { lb.classList.remove('open'); lbImg.src=''; }
+
+lbClose.onclick = lbClose_fn;
+lb.addEventListener('click', e => { if(e.target === lb) lbClose_fn(); });
+lbPrev.onclick = e => { e.stopPropagation(); lbShift(-1); };
+lbNext.onclick = e => { e.stopPropagation(); lbShift(1); };
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape')      lbClose_fn();
+  if (e.key === 'ArrowRight')  lbShift(1);
+  if (e.key === 'ArrowLeft')   lbShift(-1);
+});
+
+// ── REGISTER LIGHTBOX GROUPS ──────────────────────────────
+// Each group is an array; clicking any image in the group
+// opens the lightbox at that index and lets you page through.
+
+function registerGroup(selectors, captions) {
+  // selectors: array of CSS selectors or elements
+  // captions:  matching array of strings
+  const els = selectors.map(s => typeof s === 'string' ? document.querySelector(s) : s).filter(Boolean);
+  const group = els.map((el, i) => ({
+    src: el.tagName === 'IMG' ? el.src : el.querySelector('img').src,
+    caption: captions ? captions[i] : ''
+  }));
+  els.forEach((el, i) => {
+    const wrap = el.closest('.lb-trigger') || el;
+    wrap.style.cursor = 'zoom-in';
+    // click on the element or its parent wrapper
+    const clickTarget = el.tagName === 'IMG' ? el : el;
+    clickTarget.addEventListener('click', e => {
+      e.stopPropagation();
+      lbOpen(group, i);
+    });
+  });
+}
+
+// ── S3 PERSONAL — left panel images (CHURCH, CASA-01, CASA-02)
+// and bottom photo strip
+window.addEventListener('DOMContentLoaded', () => {
+
+  // S3 left: CHURCH hero + CASA grid
+  const s3Church = document.querySelector('#s3 .left-top img');
+  const s3Casa1  = document.querySelector('#s3 .left-bottom .lb-img:nth-child(1) img');
+  const s3Casa2  = document.querySelector('#s3 .left-bottom .lb-img:nth-child(2) img');
+  if (s3Church && s3Casa1 && s3Casa2) {
+    const grp = [
+      { src: s3Church.src, caption: 'Church' },
+      { src: s3Casa1.src,  caption: 'Job site' },
+      { src: s3Casa2.src,  caption: 'Job site' },
+    ];
+    [s3Church, s3Casa1, s3Casa2].forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => { e.stopPropagation(); lbOpen(grp, i); });
+    });
+  }
+
+  // S3 photo strip — each opens its own group (solo)
+  document.querySelectorAll('#s3 .photo-strip .ps-img img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+      lbOpen([{ src: img.src, caption: img.alt }], 0);
+    });
+  });
+
+  // S5 LEHS — floor plan strip (group of 2, pageable)
+  const lehs01 = document.querySelector('#s5 .floor-strip .fi:nth-child(1) img');
+  const lehs02 = document.querySelector('#s5 .floor-strip .fi:nth-child(2) img');
+  if (lehs01 && lehs02) {
+    const grp = [
+      { src: lehs01.src, caption: 'Level 01 — Floor Plan' },
+      { src: lehs02.src, caption: 'Level 02 — Floor Plan' },
+    ];
+    [lehs01, lehs02].forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => { e.stopPropagation(); lbOpen(grp, i); });
+    });
+  }
+
+  // S6 NDMC — render + drawing sheet (group of 2, pageable)
+  const ndmcR  = document.querySelector('#s6 .img-top img');
+  const ndmcD  = document.querySelector('#s6 .img-bot img');
+  if (ndmcR && ndmcD) {
+    const grp = [
+      { src: ndmcR.src, caption: 'NDMC — Rendering' },
+      { src: ndmcD.src, caption: 'NDMC — Drawing Sheet' },
+    ];
+    [ndmcR, ndmcD].forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => { e.stopPropagation(); lbOpen(grp, i); });
+    });
+  }
+
+  // S7 DAPENA — render + floor plan (group of 2, pageable)
+  const dapR = document.querySelector('#s7 .pright .pi:nth-child(1) img');
+  const dapP = document.querySelector('#s7 .pright .pi:nth-child(2) img');
+  if (dapR && dapP) {
+    const grp = [
+      { src: dapR.src, caption: 'Dapena Residence — Rendering' },
+      { src: dapP.src, caption: 'Dapena Residence — Floor Plan' },
+    ];
+    [dapR, dapP].forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => { e.stopPropagation(); lbOpen(grp, i); });
+    });
+  }
+
+});
 </script>
 </body>
 </html>
