@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriella Lemus — ICON Interview</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;--dark:#111;--g1:#1e1e1e;--g2:#2e2e2e;--g3:#4a4a4a;
+  --g4:#767676;--g5:#aaa;--g6:#ccc;--g7:#e2e2e2;--off:#f5f5f5;--white:#fff;
+  --fh:'Barlow Condensed',sans-serif;
+  --fb:'Barlow',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;font-family:var(--fb);cursor:none}
+.cursor{position:fixed;width:7px;height:7px;background:var(--white);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cursor-ring{position:fixed;width:28px;height:28px;border:1px solid rgba(255,255,255,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .1s ease,top .1s ease}
+
+#deck{width:100vw;height:100vh;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .6s ease;display:flex;flex-direction:column;overflow:hidden}
+.slide.active{opacity:1;pointer-events:all}
+
+#nav{position:fixed;bottom:2.8vh;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100}
+.nd{width:5px;height:5px;border-radius:50%;background:var(--g3);transition:background .3s,transform .3s;cursor:pointer}
+.nd.active{background:var(--white);transform:scale(1.6)}
+#ctr{position:fixed;bottom:2.8vh;right:3vw;font-family:var(--fm);font-size:9px;color:var(--g3);letter-spacing:2px;z-index:100}
+#hint{position:fixed;bottom:2.8vh;left:3vw;font-family:var(--fm);font-size:9px;color:var(--g3);letter-spacing:1px;z-index:100;transition:opacity 1s}
+#hint.hidden{opacity:0}
+.lbl{font-family:var(--fm);font-size:clamp(7px,.8vw,10px);letter-spacing:4px;text-transform:uppercase;color:var(--g4)}
+.lbl.light{color:var(--g3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideL{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideR{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+.slide.active .au{animation:fadeUp .65s ease both}
+.slide.active .ai{animation:fadeIn .65s ease both}
+.slide.active .al{animation:slideL .65s ease both}
+.slide.active .ar{animation:slideR .65s ease both}
+.d1{animation-delay:.07s!important}.d2{animation-delay:.18s!important}.d3{animation-delay:.3s!important}
+.d4{animation-delay:.44s!important}.d5{animation-delay:.58s!important}.d6{animation-delay:.72s!important}
+.d7{animation-delay:.86s!important}.d8{animation-delay:1s!important}.d9{animation-delay:1.14s!important}
+
+/* ═══ S1 COVER ═══ */
+#s1{background:var(--black);position:relative}
+#s1 .bg{position:absolute;inset:0;background:url('images/LEHS-R2.jpg') center/cover no-repeat;opacity:.14;filter:grayscale(100%)}
+#s1 .grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent calc(20% - 1px),rgba(255,255,255,.025) calc(20% - 1px),rgba(255,255,255,.025) 20%),repeating-linear-gradient(90deg,transparent,transparent calc(12.5% - 1px),rgba(255,255,255,.025) calc(12.5% - 1px),rgba(255,255,255,.025) 12.5%)}
+#s1 .bar{position:absolute;left:0;top:0;width:3px;height:100%;background:var(--white)}
+#s1 .cnt{position:relative;z-index:2;padding:8vh 7vw;height:100%;display:flex;flex-direction:column;justify-content:center}
+#s1 .n1{font-family:var(--fh);font-weight:300;font-size:clamp(64px,11.5vw,140px);color:var(--white);line-height:.88;letter-spacing:2px}
+#s1 .n2{font-family:var(--fh);font-weight:300;font-size:clamp(64px,11.5vw,140px);color:var(--g3);line-height:.88;letter-spacing:2px}
+#s1 .rule{width:160px;height:1px;background:var(--g2);margin:4vh 0 3vh}
+#s1 .sub{font-family:var(--fm);font-size:clamp(9px,.95vw,12px);color:var(--g4);letter-spacing:3px;text-transform:uppercase}
+#s1 .role{font-family:var(--fb);font-size:clamp(13px,1.3vw,16px);color:var(--g3);margin-top:1.5vh;font-weight:300;font-style:italic}
+#s1 .mark{position:absolute;right:6vw;bottom:5vh;font-family:var(--fh);font-weight:300;font-size:clamp(13px,1.6vw,20px);color:var(--g2);letter-spacing:10px;text-transform:uppercase}
+
+/* ═══ S2 ABOUT ME ═══ */
+#s2{background:var(--off);flex-direction:row}
+#s2 .left{width:34%;background:var(--dark);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+#s2 .hs{width:100%;height:55%;overflow:hidden;position:relative}
+#s2 .hs img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(10%)}
+#s2 .left-info{padding:3vh 5% 4vh 6vw;display:flex;flex-direction:column;gap:1.8vh;flex:1}
+#s2 .nm{font-family:var(--fh);font-weight:700;font-size:clamp(22px,2.8vw,36px);color:var(--white);line-height:1}
+#s2 .nm-sub{font-family:var(--fm);font-size:clamp(7px,.75vw,9px);color:var(--g4);letter-spacing:3px;text-transform:uppercase}
+#s2 .right{flex:1;padding:5vh 6vw;display:flex;flex-direction:column;justify-content:center;gap:2.5vh}
+#s2 .r-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.2vw,42px);color:var(--black);line-height:.95;margin-bottom:.5vh}
+#s2 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:2vh 4vw}
+#s2 .ib .ib-l{font-family:var(--fm);font-size:clamp(7px,.72vw,9px);color:var(--g4);letter-spacing:3px;text-transform:uppercase;margin-bottom:.5vh}
+#s2 .ib p{font-family:var(--fb);font-size:clamp(12px,1.1vw,14px);color:var(--g1);line-height:1.6;font-weight:400}
+#s2 .rule{height:1px;background:var(--g7)}
+#s2 .tags{display:flex;flex-wrap:wrap;gap:.6vw}
+#s2 .tag{font-family:var(--fm);font-size:clamp(7px,.75vw,9px);letter-spacing:2px;text-transform:uppercase;padding:5px 10px;border:1px solid var(--g6);color:var(--g3)}
+
+/* ═══ S3 PERSONAL ═══ */
+#s3{background:var(--dark);flex-direction:row}
+#s3 .left{width:38%;background:var(--black);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+#s3 .left-top{flex:1;overflow:hidden;position:relative}
+#s3 .left-top img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(15%);transition:filter .5s}
+#s3 .left-top:hover img{filter:grayscale(0%)}
+#s3 .left-bottom{height:40%;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--g2)}
+#s3 .lb-img{overflow:hidden;background:var(--g1)}
+#s3 .lb-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);transition:filter .4s}
+#s3 .lb-img:hover img{filter:grayscale(0%)}
+#s3 .right{flex:1;padding:5vh 6vw 5vh 5vw;display:flex;flex-direction:column;justify-content:center;gap:3vh}
+#s3 .r-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.2vw,42px);color:var(--white);line-height:.95}
+#s3 .facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5vh 3vw}
+#s3 .fact .f-icon{font-size:clamp(18px,2vw,24px);margin-bottom:.6vh;color:var(--g4)}
+#s3 .fact .f-head{font-family:var(--fh);font-weight:700;font-size:clamp(14px,1.5vw,19px);color:var(--white);margin-bottom:.4vh}
+#s3 .fact .f-body{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g5);line-height:1.55;font-weight:300}
+#s3 .photo-strip{display:flex;gap:2px;height:10vh;min-height:60px}
+#s3 .ps-img{flex:1;overflow:hidden}
+#s3 .ps-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);transition:filter .4s}
+#s3 .ps-img:hover img{filter:grayscale(0%)}
+
+/* ═══ S4 TIMELINE ═══ */
+#s4{background:var(--off);padding:5vh 7vw}
+#s4 .t-head{font-family:var(--fh);font-weight:800;font-size:clamp(28px,3.8vw,50px);color:var(--black);line-height:.95;margin:1.5vh 0 4vh}
+#s4 .timeline{display:flex;flex-direction:column;gap:0;flex:1;justify-content:center}
+#s4 .trow{display:grid;grid-template-columns:120px 40px 1fr;align-items:start;gap:0;min-height:0}
+#s4 .trow .yr{font-family:var(--fm);font-size:clamp(8px,.82vw,10px);color:var(--g4);letter-spacing:2px;padding-top:3px;text-align:right;padding-right:16px}
+#s4 .trow .dot-col{display:flex;flex-direction:column;align-items:center;position:relative}
+#s4 .trow .dot{width:10px;height:10px;border-radius:50%;background:var(--black);z-index:2;flex-shrink:0;margin-top:2px}
+#s4 .trow .dot.open{background:var(--white);border:2px solid var(--g4)}
+#s4 .trow .line{width:1px;flex:1;background:var(--g6);min-height:16px}
+#s4 .trow:last-child .line{display:none}
+#s4 .trow .info{padding:0 0 2.8vh 16px}
+#s4 .trow .firm{font-family:var(--fh);font-weight:700;font-size:clamp(14px,1.6vw,20px);color:var(--black);line-height:1.1}
+#s4 .trow .role-t{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g3);font-weight:400}
+#s4 .trow .desc{font-family:var(--fb);font-size:clamp(10px,.95vw,12px);color:var(--g4);font-weight:300;margin-top:.3vh;line-height:1.5}
+
+/* ═══ S5 PROJECT: LEHS ═══ */
+#s5{background:var(--black);flex-direction:row}
+#s5 .pleft{flex:1;padding:5vh 4vw 5vh 7vw;display:flex;flex-direction:column;justify-content:space-between}
+#s5 .pnum{font-family:var(--fh);font-weight:200;font-size:clamp(48px,8vw,100px);color:var(--g2);line-height:1;letter-spacing:-2px}
+#s5 .ptitle{font-family:var(--fh);font-weight:800;font-size:clamp(24px,3.2vw,44px);color:var(--white);line-height:.95;margin:1.5vh 0 .6vh}
+#s5 .pmeta{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g4);margin-bottom:2.5vh}
+#s5 .stat-row{display:flex;gap:3vw;margin-bottom:2.5vh}
+#s5 .sblk .sn{font-family:var(--fh);font-weight:800;font-size:clamp(20px,2.8vw,36px);color:var(--white);line-height:1}
+#s5 .sblk .sl{font-family:var(--fm);font-size:clamp(7px,.7vw,9px);color:var(--g3);letter-spacing:2px;margin-top:2px}
+#s5 .pbullets{list-style:none}
+#s5 .pbullets li{font-family:var(--fb);font-size:clamp(12px,1.1vw,14px);color:var(--g5);line-height:1.55;padding:.55vh 0 .55vh 1.3em;position:relative;border-bottom:1px solid var(--g1)}
+#s5 .pbullets li:first-child{border-top:1px solid var(--g1)}
+#s5 .pbullets li::before{content:'+';position:absolute;left:0;color:var(--g3);font-family:var(--fm)}
+#s5 .pright{width:44%;display:flex;flex-direction:column;gap:0;background:var(--g1);border-left:1px solid var(--g2);overflow:hidden}
+/* Before/after slider */
+.ba-slider{position:relative;flex:1;overflow:hidden;cursor:col-resize;user-select:none}
+.ba-slider .ba-after{position:absolute;inset:0}
+.ba-slider .ba-after img{width:100%;height:100%;object-fit:cover}
+.ba-slider .ba-before{position:absolute;inset:0;overflow:hidden}
+.ba-slider .ba-before img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}
+.ba-slider .ba-handle{position:absolute;top:0;bottom:0;width:2px;background:var(--white);z-index:10;cursor:col-resize}
+.ba-slider .ba-handle::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center}
+.ba-slider .ba-handle::before{content:'◀ ▶';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:8px;color:var(--black);z-index:2;white-space:nowrap}
+.ba-slider .ba-label{position:absolute;bottom:10px;font-family:var(--fm);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--white);background:rgba(0,0,0,.5);padding:3px 8px;z-index:5}
+.ba-slider .ba-label.left{left:10px}
+.ba-slider .ba-label.right{right:10px}
+#s5 .floor-strip{height:32%;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+#s5 .floor-strip .fi{overflow:hidden;background:var(--g2)}
+#s5 .floor-strip .fi img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(10%)}
+#s5 .floor-strip .fi-lbl{font-family:var(--fm);font-size:7px;color:var(--g5);letter-spacing:2px;text-align:center;padding:4px;background:var(--g1)}
+
+/* ═══ S6 PROJECT: NDMC ═══ */
+#s6{background:var(--off);flex-direction:row}
+#s6 .img-panel{width:44%;background:var(--g7);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;border-right:1px solid var(--g6)}
+#s6 .img-top{flex:1;overflow:hidden}
+#s6 .img-top img{width:100%;height:100%;object-fit:cover}
+#s6 .img-bot{height:38%;overflow:hidden;border-top:2px solid var(--g6)}
+#s6 .img-bot img{width:100%;height:100%;object-fit:cover}
+#s6 .pright{flex:1;padding:5vh 6vw 5vh 5vw;display:flex;flex-direction:column;justify-content:center}
+#s6 .ptitle{font-family:var(--fh);font-weight:800;font-size:clamp(24px,3.2vw,44px);color:var(--black);line-height:.95;margin:1.5vh 0 .6vh}
+#s6 .pmeta{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g3);margin-bottom:2.5vh}
+#s6 .chips{display:flex;gap:.8vw;flex-wrap:wrap;margin-bottom:2.5vh}
+#s6 .chip{background:var(--black);color:var(--white);font-family:var(--fm);font-size:clamp(7px,.75vw,9px);letter-spacing:2px;padding:6px 14px;text-transform:uppercase}
+#s6 .pbullets{list-style:none}
+#s6 .pbullets li{font-family:var(--fb);font-size:clamp(12px,1.1vw,14px);color:var(--g1);line-height:1.55;padding:.6vh 0 .6vh 1.3em;position:relative;border-bottom:1px solid var(--g7)}
+#s6 .pbullets li:first-child{border-top:1px solid var(--g7)}
+#s6 .pbullets li::before{content:'→';position:absolute;left:0;color:var(--g4);font-family:var(--fm);font-size:10px}
+#s6 .note{margin-top:2.5vh;padding:1.5vh 1.5vw;background:var(--g7);border-left:3px solid var(--g5)}
+#s6 .note p{font-family:var(--fb);font-size:clamp(10px,.95vw,12px);color:var(--g4);font-style:italic;line-height:1.55}
+
+/* ═══ S7 PROJECT: DAPENA ═══ */
+#s7{background:var(--dark);flex-direction:row}
+#s7 .pleft{flex:1;padding:5vh 4vw 5vh 7vw;display:flex;flex-direction:column;justify-content:space-between}
+#s7 .pnum{font-family:var(--fh);font-weight:200;font-size:clamp(48px,8vw,100px);color:var(--g2);line-height:1;letter-spacing:-2px}
+#s7 .ptitle{font-family:var(--fh);font-weight:800;font-size:clamp(24px,3.2vw,44px);color:var(--white);line-height:.95;margin:1.5vh 0 .6vh}
+#s7 .pmeta{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g4);margin-bottom:2.5vh}
+#s7 .pbullets{list-style:none}
+#s7 .pbullets li{font-family:var(--fb);font-size:clamp(12px,1.1vw,14px);color:var(--g5);line-height:1.55;padding:.55vh 0 .55vh 1.3em;position:relative;border-bottom:1px solid var(--g2)}
+#s7 .pbullets li:first-child{border-top:1px solid var(--g2)}
+#s7 .pbullets li::before{content:'+';position:absolute;left:0;color:var(--g3);font-family:var(--fm)}
+#s7 .pright{width:44%;display:flex;flex-direction:column;gap:2px;background:var(--g2);border-left:1px solid var(--g2);overflow:hidden}
+#s7 .pright .pi{flex:1;overflow:hidden}
+#s7 .pright .pi img{width:100%;height:100%;object-fit:cover}
+
+/* ═══ S8 PROBLEM SOLVING ═══ */
+#s8{background:var(--off);padding:5vh 7vw}
+#s8 .t-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.5vw,48px);color:var(--black);line-height:.95;margin:1.5vh 0 3.5vh}
+#s8 .ps-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5vw;flex:1}
+#s8 .pcard{border:1px solid var(--g7);padding:3vh 2.5vw;display:flex;flex-direction:column;background:var(--white);position:relative;overflow:hidden}
+#s8 .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--g6)}
+#s8 .pcard.hi::before{background:var(--black)}
+#s8 .pc-num{font-family:var(--fh);font-weight:200;font-size:clamp(36px,4.5vw,56px);color:var(--g7);line-height:1;margin-bottom:1vh}
+#s8 .pc-head{font-family:var(--fh);font-weight:700;font-size:clamp(15px,1.7vw,22px);color:var(--black);line-height:1.1;margin-bottom:1.2vh}
+#s8 .pc-body{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g2);line-height:1.65;font-weight:300;flex:1}
+#s8 .pc-tag{margin-top:2vh;font-family:var(--fm);font-size:clamp(7px,.72vw,9px);color:var(--g4);letter-spacing:2px;text-transform:uppercase;border-top:1px solid var(--g7);padding-top:1.5vh}
+
+/* ═══ S9 BIM / WORKFLOW ═══ */
+#s9{background:var(--black);padding:5vh 7vw}
+#s9 .t-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.5vw,48px);color:var(--white);line-height:.95;margin:1.5vh 0 3.5vh}
+#s9 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:4vw;flex:1}
+#s9 .col-head{font-family:var(--fm);font-size:clamp(8px,.8vw,10px);letter-spacing:3px;color:var(--g4);margin-bottom:2.5vh;text-transform:uppercase;padding-bottom:2vh;border-bottom:1px solid var(--g2)}
+#s9 .items{list-style:none}
+#s9 .items li{font-family:var(--fb);font-size:clamp(12px,1.15vw,15px);color:var(--g5);line-height:1.6;padding:1vh 0 1vh 1.2em;position:relative;border-bottom:1px solid var(--g2)}
+#s9 .items li:last-child{border-bottom:none}
+#s9 .items li::before{content:'·';position:absolute;left:0;color:var(--g4)}
+#s9 .icon-bar{margin-top:3.5vh;padding:2vh 2vw;background:var(--g1);border-left:3px solid var(--g3)}
+#s9 .icon-bar p{font-family:var(--fb);font-size:clamp(11px,1.1vw,14px);color:var(--g4);line-height:1.6;font-style:italic}
+
+/* ═══ S10 FUTURE OF BUILDING ═══ */
+#s10{background:var(--dark);padding:5vh 7vw}
+#s10 .t-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.5vw,48px);color:var(--white);line-height:.95;margin:1.5vh 0 3.5vh}
+#s10 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2vw;flex:1}
+#s10 .fcard{border:1px solid var(--g2);padding:3vh 2.5vw;display:flex;flex-direction:column;gap:1.5vh;transition:border-color .3s}
+#s10 .fcard:hover{border-color:var(--g4)}
+#s10 .fc-icon{font-size:clamp(18px,2vw,24px);color:var(--g4)}
+#s10 .fc-head{font-family:var(--fh);font-weight:700;font-size:clamp(16px,1.8vw,22px);color:var(--white);line-height:1.1}
+#s10 .fc-body{font-family:var(--fb);font-size:clamp(11px,1.05vw,13px);color:var(--g5);line-height:1.65;font-weight:300;flex:1}
+
+/* ═══ S11 WHY ICON ═══ */
+#s11{background:var(--off);padding:5vh 7vw}
+#s11 .t-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.5vw,48px);color:var(--black);line-height:.95;margin:1.5vh 0 3.5vh}
+#s11 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:5vw;flex:1}
+#s11 .col-title{font-family:var(--fh);font-weight:700;font-size:clamp(14px,1.5vw,18px);color:var(--g3);letter-spacing:1px;margin-bottom:2vh;padding-bottom:1.5vh;border-bottom:2px solid var(--g7)}
+#s11 .col-title.dark{color:var(--black);border-bottom-color:var(--black)}
+#s11 .items{list-style:none}
+#s11 .items li{font-family:var(--fb);font-size:clamp(12px,1.15vw,15px);color:var(--g2);line-height:1.6;padding:1vh 0 1vh 1.2em;position:relative;border-bottom:1px solid var(--g7)}
+#s11 .items li:last-child{border-bottom:none}
+#s11 .items li::before{content:'—';position:absolute;left:0;color:var(--g5);font-family:var(--fm);font-size:10px}
+#s11 .items.match li::before{content:'✓';color:var(--g3)}
+
+/* ═══ S12 WHY I'M A FIT ═══ */
+#s12{background:var(--black);padding:5vh 7vw}
+#s12 .t-head{font-family:var(--fh);font-weight:800;font-size:clamp(26px,3.5vw,48px);color:var(--white);line-height:.95;margin:1.5vh 0 3.5vh}
+#s12 .fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:4vw;flex:1}
+#s12 .fcol-head{font-family:var(--fm);font-size:clamp(8px,.8vw,10px);letter-spacing:3px;color:var(--g4);text-transform:uppercase;margin-bottom:2vh;padding-bottom:2vh;border-bottom:1px solid var(--g2)}
+#s12 .items{list-style:none}
+#s12 .items li{font-family:var(--fb);font-size:clamp(12px,1.15vw,15px);color:var(--g5);line-height:1.6;padding:1vh 0 1vh 1.2em;position:relative;border-bottom:1px solid var(--g2)}
+#s12 .items li:last-child{border-bottom:none}
+#s12 .items li::before{content:'·';position:absolute;left:0;color:var(--g4)}
+#s12 .items.mine li::before{content:'→';color:var(--g5);font-family:var(--fm);font-size:10px}
+
+/* ═══ S13 CLOSING ═══ */
+#s13{background:var(--black);position:relative;overflow:hidden}
+#s13 .grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent calc(20% - 1px),rgba(255,255,255,.02) calc(20% - 1px),rgba(255,255,255,.02) 20%),repeating-linear-gradient(90deg,transparent,transparent calc(12.5% - 1px),rgba(255,255,255,.02) calc(12.5% - 1px),rgba(255,255,255,.02) 12.5%)}
+#s13 .cnt{position:relative;z-index:2;height:100%;padding:8vh 8vw;display:flex;flex-direction:column;justify-content:center}
+#s13 .cl{font-family:var(--fh);font-weight:800;font-size:clamp(44px,9vw,110px);color:var(--white);line-height:.87;letter-spacing:-1px}
+#s13 .cl.dim{color:var(--g3)}
+#s13 .cl.thin{font-weight:200;color:var(--g2)}
+#s13 .rule{width:70px;height:1px;background:var(--g3);margin:5vh 0 3vh}
+#s13 .contact{display:flex;gap:3vw;flex-wrap:wrap}
+#s13 .ci{font-family:var(--fm);font-size:clamp(8px,.9vw,11px);color:var(--g4);letter-spacing:1px}
+#s13 .q-mark{position:absolute;right:8vw;top:50%;transform:translateY(-50%);font-family:var(--fh);font-weight:900;font-size:clamp(120px,20vw,240px);color:var(--g1);line-height:1;pointer-events:none}
+#s13 .icon-mark{position:absolute;right:7vw;bottom:5vh;font-family:var(--fh);font-weight:200;font-size:clamp(12px,1.5vw,18px);color:var(--g2);letter-spacing:10px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div id="deck">
+
+<!-- ══════════════════════════════════════════
+     S1 — COVER
+══════════════════════════════════════════ -->
+<div class="slide" id="s1">
+  <div class="bg"></div>
+  <div class="grid"></div>
+  <div class="bar"></div>
+  <div class="cnt">
+    <div class="lbl ai d1" style="color:var(--g3)">Building Designer II — Interview</div>
+    <div class="n1 au d2">GABRIELLA</div>
+    <div class="n2 au d3">LEMUS</div>
+    <div class="rule ai d4"></div>
+    <div class="sub au d5">Job Captain &nbsp;·&nbsp; PBK Architects &nbsp;·&nbsp; Dallas, TX</div>
+    <div class="role au d6">B.Arch, University of Houston</div>
+  </div>
+  <div class="mark ai d7">ICON</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S2 — ABOUT ME
+══════════════════════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="left al d2">
+    <div class="hs">
+      <img src="images/HEADSHOT-01.png" alt="Gabriella Lemus">
+    </div>
+    <div class="left-info">
+      <div>
+        <div class="nm">Gabriella Lemus</div>
+        <div class="nm-sub">Job Captain · PBK Architects</div>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="lbl d1">01 / About Me</div>
+    <div class="r-head au d2">Designer, coordinator,<br>problem solver.</div>
+    <div class="grid2 au d3">
+      <div class="ib">
+        <div class="ib-l">Current Role</div>
+        <p>Job Captain at PBK Architects, Dallas. 5 years of experience across education, civic, residential, and institutional work.</p>
+      </div>
+      <div class="ib">
+        <div class="ib-l">BIM</div>
+        <p>BIM Representative for PBK's Dallas office. Helped support Revit standards, onboard staff, and troubleshoot software workflows.</p>
+      </div>
+      <div class="ib">
+        <div class="ib-l">Documentation</div>
+        <p>Comfortable across all project phases — SD through CA. Construction documentation, technical detailing, and consultant coordination.</p>
+      </div>
+      <div class="ib">
+        <div class="ib-l">Approach</div>
+        <p>Organized, collaborative, and detail-oriented. I like understanding how buildings actually go together and making sure the documents reflect that.</p>
+      </div>
+    </div>
+    <div class="rule au d4"></div>
+    <div class="tags au d5">
+      <span class="tag">Construction Docs</span>
+      <span class="tag">Revit / BIM</span>
+      <span class="tag">Consultant Coordination</span>
+      <span class="tag">Technical Detailing</span>
+      <span class="tag">CA Involvement</span>
+      <span class="tag">K–12 / Civic / Residential</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S3 — PERSONAL
+══════════════════════════════════════════ -->
+<div class="slide" id="s3">
+  <div class="left al d2">
+    <div class="left-top">
+      <img src="images/CHURCH.jpg" alt="Church">
+    </div>
+    <div class="left-bottom">
+      <div class="lb-img"><img src="images/CASA-01.jpg" alt="Construction site as a kid"></div>
+      <div class="lb-img"><img src="images/CASA-02.jpg" alt="Construction site as a kid"></div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="lbl light d1">02 / Outside the Office</div>
+    <div class="r-head au d2">A few things<br>about me.</div>
+    <div class="facts-grid au d3">
+      <div class="fact">
+        <div class="f-icon">🏂</div>
+        <div class="f-head">Snowboarding</div>
+        <div class="f-body">One of my favorite ways to reset. Always looking for the next mountain.</div>
+      </div>
+      <div class="fact">
+        <div class="f-icon">🐶</div>
+        <div class="f-head">Dog Mom</div>
+        <div class="f-body">Luka is the best coworker. Remote days are his favorite.</div>
+      </div>
+      <div class="fact">
+        <div class="f-icon">🦈</div>
+        <div class="f-head">Favorite Animal</div>
+        <div class="f-body">Sharks. Efficient, adaptable, and built to last — honestly not a bad model for design.</div>
+      </div>
+      <div class="fact">
+        <div class="f-icon">🌱</div>
+        <div class="f-head">Built Around Building</div>
+        <div class="f-body">Grew up on construction sites with family in the industry. Architecture has always felt like the natural extension of that.</div>
+      </div>
+    </div>
+    <div class="photo-strip au d5">
+      <div class="ps-img"><img src="images/LUKA.jpg" alt="Luka"></div>
+      <div class="ps-img"><img src="images/SNOWBOARD.jpg" alt="Snowboarding"></div>
+      <div class="ps-img"><img src="images/BOYS.jpg" alt="Nephews"></div>
+      <div class="ps-img"><img src="images/YAYA.jpg" alt="Niece"></div>
+      <div class="ps-img"><img src="images/GIRLS.jpg" alt="Family"></div>
+      <div class="ps-img"><img src="images/MEN.jpg" alt="Family"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S4 — TIMELINE
+══════════════════════════════════════════ -->
+<div class="slide" id="s4">
+  <div class="lbl d1">03 / Professional Background</div>
+  <div class="t-head au d2">Experience &<br>Growth</div>
+  <div class="timeline">
+
+    <div class="trow au d3">
+      <div class="yr">2017 – 2022</div>
+      <div class="dot-col"><div class="dot"></div><div class="line"></div></div>
+      <div class="info">
+        <div class="firm">University of Houston</div>
+        <div class="role-t">B.Arch · Minor in Education · Hines College of Architecture</div>
+        <div class="desc">Technical focus, building systems, design theory. BIM coursework. UH Spirit Mascot — Shasta 🐾</div>
+      </div>
+    </div>
+
+    <div class="trow au d4">
+      <div class="yr">2021</div>
+      <div class="dot-col"><div class="dot"></div><div class="line"></div></div>
+      <div class="info">
+        <div class="firm">Morgan Group — Houston</div>
+        <div class="role-t">Design Intern</div>
+        <div class="desc">Residential multi-unit design. 34 unit plan types, interior layouts, material specs, and design standards.</div>
+      </div>
+    </div>
+
+    <div class="trow au d5">
+      <div class="yr">2022 – 2023</div>
+      <div class="dot-col"><div class="dot"></div><div class="line"></div></div>
+      <div class="info">
+        <div class="firm">PBK Architects — Dallas</div>
+        <div class="role-t">Architectural Designer → Lead Technical Designer</div>
+        <div class="desc">K–12 and civic projects. Construction documents, consultant coordination, building envelope detailing, CA involvement. Named BIM Representative for the Dallas office.</div>
+      </div>
+    </div>
+
+    <div class="trow au d6">
+      <div class="yr">2023 – Present</div>
+      <div class="dot-col"><div class="dot"></div><div class="line"></div></div>
+      <div class="info">
+        <div class="firm">PBK Architects — Dallas</div>
+        <div class="role-t">Job Captain</div>
+        <div class="desc">Leading documentation on larger, more complex projects. Managing drawing sets, coordinating consultants, supporting permitting and CA.</div>
+      </div>
+    </div>
+
+    <div class="trow au d7">
+      <div class="yr">Next</div>
+      <div class="dot-col"><div class="dot open"></div></div>
+      <div class="info">
+        <div class="firm">ICON</div>
+        <div class="role-t">Building Designer II — ICON PRIME</div>
+        <div class="desc">Bring technical documentation, coordination experience, and systems thinking to advanced construction technology.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S5 — PROJECT: LEHS
+══════════════════════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="pleft">
+    <div>
+      <div class="lbl" style="color:var(--g3)">04 / Project Work</div>
+      <div class="pnum au d2">01</div>
+      <div class="ptitle au d3">Little Elm High School<br>Additions &amp; Renovations</div>
+      <div class="pmeta au d3">PBK Architects · Little Elm ISD · Lead Technical Designer</div>
+      <div class="stat-row au d4">
+        <div class="sblk"><div class="sn">224K</div><div class="sl">SF Total</div></div>
+        <div class="sblk"><div class="sn">SD–CA</div><div class="sl">Full Delivery</div></div>
+        <div class="sblk"><div class="sn">K–12</div><div class="sl">Type</div></div>
+      </div>
+    </div>
+    <ul class="pbullets au d5">
+      <li>Developed full construction document set through construction administration</li>
+      <li>Detailed window systems, door assemblies, and building envelope conditions</li>
+      <li>Coordinated with structural, MEP, and civil consultants across additions and renovations</li>
+      <li>Managed the Revit model, authored specifications, and responded to RFIs</li>
+      <li>Tracked open items and led coordination meetings with subconsultants</li>
+    </ul>
+  </div>
+  <div class="pright ar d4">
+    <!-- BA Slider 1: LEHS-R1 (before) / LEHS-R2 (after) -->
+    <div class="ba-slider" id="ba1" style="flex:1">
+      <div class="ba-after"><img src="images/LEHS-R2.jpg" alt="After"></div>
+      <div class="ba-before" id="ba1-before" style="width:50%"><img src="images/LEHS-R1.jpg" alt="Before"></div>
+      <div class="ba-handle" id="ba1-handle" style="left:50%"></div>
+    </div>
+    <!-- BA Slider 2: LEHS-R3 (before) / LEHS-R4 (after) -->
+    <div class="ba-slider" id="ba2" style="height:38%;flex-shrink:0">
+      <div class="ba-after"><img src="images/LEHS-R4.jpg" alt="After"></div>
+      <div class="ba-before" id="ba2-before" style="width:50%"><img src="images/LEHS-R3.jpg" alt="Before"></div>
+      <div class="ba-handle" id="ba2-handle" style="left:50%"></div>
+    </div>
+    <!-- Floor plans strip -->
+    <div class="floor-strip" style="height:22%;flex-shrink:0">
+      <div class="fi">
+        <img src="images/LEHS-01.jpg" alt="Floor Plan 1">
+        <div class="fi-lbl">Level 01 Plan</div>
+      </div>
+      <div class="fi">
+        <img src="images/LEHS-02.jpg" alt="Floor Plan 2">
+        <div class="fi-lbl">Level 02 Plan</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S6 — PROJECT: NDMC
+══════════════════════════════════════════ -->
+<div class="slide" id="s6">
+  <div class="img-panel al d3">
+    <div class="img-top">
+      <img src="images/NDMC-R1.jpg" alt="NDMC Render">
+    </div>
+    <div class="img-bot">
+      <img src="images/NDMC-01.jpg" alt="NDMC Drawing Sheet">
+    </div>
+  </div>
+  <div class="pright">
+    <div class="lbl d1">04 / Project Work</div>
+    <div class="ptitle au d2">NDMC Cemetery<br>Support Building</div>
+    <div class="pmeta au d3">PBK Architects · National Cemetery Administration · Project Manager</div>
+    <div class="chips au d4">
+      <div class="chip">1,675 SF</div>
+      <div class="chip">Federal Client</div>
+      <div class="chip">PM Role</div>
+      <div class="chip">Full CD Set</div>
+    </div>
+    <ul class="pbullets au d5">
+      <li>Served as project manager on this smaller federal project</li>
+      <li>Developed the full drawing set, including site work, architecture, and details</li>
+      <li>Coordinated documentation across disciplines and supported the permitting process</li>
+      <li>Navigated federal review requirements and agency coordination</li>
+      <li>Good experience managing a project independently from early design through documentation</li>
+    </ul>
+    <div class="note au d6">
+      <p>First project where I owned the full scope — helpful for understanding how all the pieces actually connect.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S7 — PROJECT: DAPENA RESIDENCE
+══════════════════════════════════════════ -->
+<div class="slide" id="s7">
+  <div class="pleft">
+    <div>
+      <div class="lbl" style="color:var(--g3)">04 / Project Work</div>
+      <div class="pnum au d2">03</div>
+      <div class="ptitle au d3">Dapena Residence</div>
+      <div class="pmeta au d3">Private Client · Florida Keys · ~3,000 SF</div>
+    </div>
+    <ul class="pbullets au d4">
+      <li>Custom single-family residence in a coastal environment</li>
+      <li>Developed floor plans, building sections, and exterior detailing</li>
+      <li>Coordinated with client and structural engineer through design development</li>
+      <li>Worked through coastal resilience requirements and local permitting considerations</li>
+      <li>Good exposure to residential design outside the institutional project type</li>
+    </ul>
+  </div>
+  <div class="pright ar d4">
+    <div class="pi" style="flex:1">
+      <img src="images/DAPENA-R1.jpg" alt="Dapena Render">
+    </div>
+    <div class="pi" style="height:40%;flex-shrink:0;border-top:2px solid var(--g2)">
+      <img src="images/DAPENA.jpg" alt="Dapena Floor Plan">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S8 — PROBLEM SOLVING / REAL EXPERIENCE
+══════════════════════════════════════════ -->
+<div class="slide" id="s8">
+  <div class="lbl d1">05 / How I Work</div>
+  <div class="t-head au d2">Real Problems,<br>Real Solutions</div>
+  <div class="ps-grid">
+    <div class="pcard hi au d3">
+      <div class="pc-num">01</div>
+      <div class="pc-head">Owning a Small Project</div>
+      <div class="pc-body">On the NDMC project, I managed the full scope independently — drawings, consultant coordination, federal review, and permitting support. It was the first time I had to track every piece of the project myself. Taught me how to stay organized under a lot of moving parts.</div>
+      <div class="pc-tag">Project Ownership · Federal · Documentation</div>
+    </div>
+    <div class="pcard au d4">
+      <div class="pc-num">02</div>
+      <div class="pc-head">Building Envelope Details</div>
+      <div class="pc-body">At Little Elm HS, I worked through window-to-wall conditions at a large scale — coordinating with the envelope consultant and structural engineer to resolve flashing, thermal bridging, and framing conflicts before they became field issues. A lot of back and forth, but worth it.</div>
+      <div class="pc-tag">Detailing · Coordination · Constructability</div>
+    </div>
+    <div class="pcard au d5">
+      <div class="pc-num">03</div>
+      <div class="pc-head">Consultant Coordination</div>
+      <div class="pc-body">Managing a large K–12 CD set means tracking a lot of consultants at once — MEP, structural, civil, geotechnical. I set up shared issue logs, led coordination check-ins, and made sure the Revit model stayed aligned with what the consultants were issuing. Not glamorous, but it keeps projects from falling apart.</div>
+      <div class="pc-tag">BIM · Multi-Discipline · Organization</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S9 — BIM / WORKFLOW
+══════════════════════════════════════════ -->
+<div class="slide" id="s9">
+  <div class="lbl" style="color:var(--g4)">06 / BIM &amp; Workflow</div>
+  <div class="t-head au d2">Systems Thinking</div>
+  <div class="two-col">
+    <div class="au d3">
+      <div class="col-head">What I've Done at PBK</div>
+      <ul class="items">
+        <li>BIM Representative for the Dallas office</li>
+        <li>Helped implement and maintain Revit standards and templates</li>
+        <li>Assisted with onboarding new staff to office workflows</li>
+        <li>Troubleshot Revit and software issues across the team</li>
+        <li>Supported quality control and drawing coordination</li>
+        <li>Helped develop and organize detail libraries</li>
+      </ul>
+    </div>
+    <div class="au d4">
+      <div class="col-head">Why It Connects to ICON</div>
+      <ul class="items">
+        <li>ICON's BuildOS and intelligent print workflows need people who think about process</li>
+        <li>Coordinating across architecture, engineering, and fabrication is not that different from managing a large CD set — it just moves faster</li>
+        <li>I'm comfortable working in evolving systems and helping improve them as I go</li>
+        <li>I like organizing information and making workflows easier to follow for the whole team</li>
+      </ul>
+    </div>
+  </div>
+  <div class="icon-bar au d6">
+    <p>I don't need the system to be perfect before I can work in it. I'm good at learning quickly, staying organized, and helping the team stay aligned.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S10 — FUTURE OF BUILDING
+══════════════════════════════════════════ -->
+<div class="slide" id="s10">
+  <div class="lbl" style="color:var(--g4)">07 / The Future I Want to Build</div>
+  <div class="t-head au d2">Construction is<br>changing. Fast.</div>
+  <div class="grid3">
+    <div class="fcard au d3">
+      <div class="fc-icon">◻</div>
+      <div class="fc-head">Robotics &amp; Fabrication</div>
+      <div class="fc-body">Watching Titan print structural walls faster than a traditional crew can frame them is genuinely exciting. The idea that a drawing can become a building with less labor, less waste, and more precision — that's the direction I want to work in.</div>
+    </div>
+    <div class="fcard au d4">
+      <div class="fc-icon">⬡</div>
+      <div class="fc-head">Intelligent Workflows</div>
+      <div class="fc-body">BuildOS translating design intent into toolpaths and synchronizing material flow in real time — that's exactly the kind of system I want to understand and contribute to. Automated, precise, and team-coordinated.</div>
+    </div>
+    <div class="fcard au d5">
+      <div class="fc-icon">◈</div>
+      <div class="fc-head">Resilient Infrastructure</div>
+      <div class="fc-body">ICON's wall system — printed concrete, spray foam, fire and mold resistance — solves real performance problems. Coming from K–12 and civic work where durability and lifecycle cost matter, I find that kind of technical focus genuinely interesting.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S11 — WHY ICON
+══════════════════════════════════════════ -->
+<div class="slide" id="s11">
+  <div class="lbl d1">08 / Why ICON</div>
+  <div class="t-head au d2">Where I want<br>to go next.</div>
+  <div class="two-col">
+    <div class="au d3">
+      <div class="col-title dark">What drew me here</div>
+      <ul class="items">
+        <li>Design + build integration — I've always been more interested in how buildings get built, not just drawn</li>
+        <li>Construction technology that actually changes how a project is delivered</li>
+        <li>A team that works across architecture, engineering, software, and field operations at once</li>
+        <li>The ICON PRIME mission — durable, resilient infrastructure that serves a real purpose</li>
+        <li>Room to grow in a company that is still figuring out its systems — I work well in that environment</li>
+      </ul>
+    </div>
+    <div class="au d4">
+      <div class="col-title">What I bring</div>
+      <ul class="items match">
+        <li>Construction documentation experience across complex projects</li>
+        <li>BIM coordination and workflow support</li>
+        <li>Consultant and multi-discipline coordination</li>
+        <li>Technical detailing — envelope, assemblies, systems integration</li>
+        <li>Ability to work independently and stay organized on complex scopes</li>
+        <li>Interest in improving systems as they evolve, not just following them</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S12 — WHY I'M A FIT
+══════════════════════════════════════════ -->
+<div class="slide" id="s12">
+  <div class="lbl" style="color:var(--g4)">09 / Why I'm a Good Fit</div>
+  <div class="t-head au d2" style="color:var(--white)">ICON needs &nbsp;←→&nbsp; What I offer</div>
+  <div class="fit-grid">
+    <div class="au d3">
+      <div class="fcol-head">What ICON is Looking For</div>
+      <ul class="items">
+        <li>Construction documentation across all phases</li>
+        <li>Wall system and building envelope detailing</li>
+        <li>Multi-discipline coordination</li>
+        <li>BIM and digital workflow proficiency</li>
+        <li>Ability to work in an evolving, fast-moving environment</li>
+        <li>Interest in construction technology and resilient design</li>
+        <li>Someone who can collaborate across architecture, engineering, and field teams</li>
+      </ul>
+    </div>
+    <div class="au d4">
+      <div class="fcol-head">My Experience and Strengths</div>
+      <ul class="items mine">
+        <li>5 years across K–12, federal, civic, and residential documentation</li>
+        <li>Envelope detailing and assemblies on large-scale projects</li>
+        <li>Coordinated MEP, structural, and civil consultants across multiple projects</li>
+        <li>BIM Representative at PBK — Revit standards, onboarding, workflow support</li>
+        <li>Comfortable in new systems and good at adapting quickly</li>
+        <li>Genuinely interested in construction technology and how buildings get built</li>
+        <li>Works well independently and across teams — used to a lot of moving pieces</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     S13 — CLOSING
+══════════════════════════════════════════ -->
+<div class="slide" id="s13">
+  <div class="grid"></div>
+  <div class="q-mark ai d6">?</div>
+  <div class="cnt">
+    <div class="cl au d2">Curious.</div>
+    <div class="cl dim au d3">Collaborative.</div>
+    <div class="cl thin au d4">Ready to build.</div>
+    <div class="rule ai d5"></div>
+    <div class="contact au d6">
+      <span class="ci">gabriellalemux@gmail.com</span>
+      <span class="ci">(786) 493-7391</span>
+      <span class="ci">gabriellalemux.github.io/gabriella.portfolio</span>
+    </div>
+  </div>
+  <div class="icon-mark ai d7">ICON</div>
+</div>
+
+</div><!-- /#deck -->
+
+<div id="nav"></div>
+<div id="ctr">01 / 13</div>
+<div id="hint">← → NAVIGATE</div>
+
+<script>
+// ── SLIDES ──
+const slides = document.querySelectorAll('.slide');
+const navEl  = document.getElementById('nav');
+const ctr    = document.getElementById('ctr');
+const hint   = document.getElementById('hint');
+let cur = 0;
+
+slides.forEach((_,i)=>{
+  const d = document.createElement('div');
+  d.className='nd'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  navEl.appendChild(d);
+});
+
+function goTo(n){
+  if(n<0||n>=slides.length)return;
+  slides[cur].classList.remove('active');
+  navEl.children[cur].classList.remove('active');
+  cur=n;
+  slides[cur].classList.add('active');
+  navEl.children[cur].classList.add('active');
+  ctr.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+}
+
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();goTo(cur+1);}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();goTo(cur-1);}
+  hint.classList.add('hidden');
+});
+document.getElementById('deck').addEventListener('click',e=>{
+  if(e.target.closest('#nav'))return;
+  e.clientX>window.innerWidth*.5?goTo(cur+1):goTo(cur-1);
+  hint.classList.add('hidden');
+});
+setTimeout(()=>hint.classList.add('hidden'),6000);
+
+// ── CURSOR ──
+const curEl=document.getElementById('cursor');
+const ringEl=document.getElementById('cursor-ring');
+document.addEventListener('mousemove',e=>{
+  curEl.style.left=e.clientX+'px'; curEl.style.top=e.clientY+'px';
+  ringEl.style.left=e.clientX+'px'; ringEl.style.top=e.clientY+'px';
+});
+
+// ── BEFORE/AFTER SLIDERS ──
+function makeSlider(sliderId, beforeId, handleId){
+  const wrap   = document.getElementById(sliderId);
+  const before = document.getElementById(beforeId);
+  const handle = document.getElementById(handleId);
+  if(!wrap)return;
+  let dragging=false;
+  function setPos(x){
+    const r=wrap.getBoundingClientRect();
+    let pct=Math.min(Math.max((x-r.left)/r.width,0),1);
+    before.style.width=(pct*100)+'%';
+    handle.style.left=(pct*100)+'%';
+  }
+  handle.addEventListener('mousedown',e=>{dragging=true;e.preventDefault();});
+  wrap.addEventListener('mousedown',e=>{dragging=true;setPos(e.clientX);});
+  document.addEventListener('mousemove',e=>{if(dragging)setPos(e.clientX);});
+  document.addEventListener('mouseup',()=>dragging=false);
+  handle.addEventListener('touchstart',e=>{dragging=true;e.preventDefault();},{passive:false});
+  wrap.addEventListener('touchstart',e=>{dragging=true;setPos(e.touches[0].clientX);},{passive:false});
+  document.addEventListener('touchmove',e=>{if(dragging)setPos(e.touches[0].clientX);},{passive:false});
+  document.addEventListener('touchend',()=>dragging=false);
+}
+makeSlider('ba1','ba1-before','ba1-handle');
+makeSlider('ba2','ba2-before','ba2-handle');
+
+goTo(0);
+</script>
+</body>
+</html>
